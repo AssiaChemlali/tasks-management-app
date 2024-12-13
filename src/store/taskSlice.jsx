@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-
  export const  fetchTasks=createAsyncThunk(
   'tasks/fetchTasks',async()=>{
   const url="https://jsonplaceholder.typicode.com/todos?_limit=5"
@@ -29,7 +28,8 @@ const taskSlice=createSlice({
   initialState,
   reducers:{
     addNewTask(state,action){
-
+    state.tasks.push(action.payload)
+   
     },
     removeTask(state,action){
 

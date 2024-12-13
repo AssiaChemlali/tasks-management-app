@@ -12,15 +12,12 @@ const ListTasks = () => {
   const error=useSelector((state)=>state.tasks.error)
   const dispatch=useDispatch()
 
-  const [tasksItems,setTasksItems]=useState([])
-
   useEffect (()=>{
       dispatch(fetchTasks())
-      setTasksItems(tasks)
-
+  
   },[dispatch])
 
- console.log( tasksItems)
+  console.log(tasks)
   
   return (
     <div className='mt-10'>
