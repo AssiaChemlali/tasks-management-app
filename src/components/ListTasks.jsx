@@ -17,10 +17,10 @@ const ListTasks = () => {
   
   },[dispatch])
 
-  console.log(tasks)
+
   
   return (
-    <div className='mt-10'>
+    <div className='mt-10 relative'>
 
       <div className='flex items-center mb-3'>
         <h3 className='text-violet-500 font-bold'>Task List </h3>
