@@ -17,6 +17,7 @@ const statusRef=useRef()
     const title=titleRef.current.value;
     const desc=descRef.current.value
     const status=statusRef.current.value
+
     const todo={
       id:uuid4(),
       title:title,
@@ -25,9 +26,9 @@ const statusRef=useRef()
     }
    
     dispatch(addNewTask(todo))
-        console.log("added")
+    titleRef.current.value="";
+    descRef.current.value=""
   
-     
 
   }
 
