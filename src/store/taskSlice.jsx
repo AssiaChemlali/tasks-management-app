@@ -1,19 +1,32 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 
- export const  fetchedTasks=createAsyncThunk('tasks/fetch',async()=>{
-  const url="https://jsonplaceholder.typicode.com/todos?limit=10"
+ export const  fetchTasks=createAsyncThunk(
+  'tasks/fetchTasks',async()=>{
+  const url="https://jsonplaceholder.typicode.com/todos?_limit=5"
   const response= await fetch(url)
   const data=await response.json()
-  console.log("data",data)
-  return data
+  return data.map(task=>(
+    {
+      id:task.id,
+      title:task.title,
+      description:"",
+      status:task.completed ? 'Completed':'To Do'
+    }
+  )
+)
  })
  
-
+const initialState={
+  tasks:[],
+  loading:false,
+  error:null,
+  status:"All"
+}
 
 const taskSlice=createSlice({
   name:'tasks',
-  initialState:[],
+  initialState,
   reducers:{
     addNewTask(state,action){
 
@@ -24,14 +37,24 @@ const taskSlice=createSlice({
     updateTask(state,action){
 
     },
-    fetchTasks(state,action){
-      
-      
-      
-    }
+   
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchTasks.pending, (state) => {
+      state.loading = true;
+      state.error=null
+    });
+    builder.addCase(fetchTasks.fulfilled, (state, action) => {
+      state.tasks = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(fetchTasks.rejected, (state) => {
+      state.loading = false;
+      state.error=error.message
+    });
   }
 })
 
-export const {addNewTask,removeTask,fetchTasks}=taskSlice.actions
+export const {addNewTask,removeTask}=taskSlice.actions
 const tasksReducer=taskSlice.reducer
 export default tasksReducer

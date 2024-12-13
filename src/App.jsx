@@ -9,8 +9,13 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AddNewTask/>
-      <ListTasks/>
+     <div className='p-10 text-center font-serif'>
+     <h2 className='text-violet-500 font-bold capitalize  text-2xl mb-5'>task Management App</h2>
+
+     <AddNewTask/>
+     <ListTasks/>
+     </div>
+     
     </Provider>
   )
 }
