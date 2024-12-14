@@ -9,7 +9,7 @@ function App() {
 
   return (
     <Provider store={store}>
-     <div className='p-10 text-center font-serif'>
+     <div className='p-10 text-center font-serif w-[500px]'>
      <h2 className='text-violet-500 font-bold capitalize  text-2xl mb-5'>task Management App</h2>
 
      <AddNewTask/>

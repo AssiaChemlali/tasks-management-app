@@ -35,7 +35,11 @@ const taskSlice=createSlice({
 
     },
     updateTask(state,action){
-
+      
+     state.tasks= state.tasks.map((task)=>{
+        return task.id===action.payload.id ? action.payload : task
+      })
+      console.log(state.tasks)
     },
    
   },
@@ -55,6 +59,6 @@ const taskSlice=createSlice({
   }
 })
 
-export const {addNewTask,removeTask}=taskSlice.actions
+export const {addNewTask,removeTask,updateTask}=taskSlice.actions
 const tasksReducer=taskSlice.reducer
 export default tasksReducer

@@ -27,7 +27,10 @@ const Task = ({task}) => {
       </div>
 
     </div>
- {isEdit && <EditTask isEdit={isEdit} setIsEdit={setIsEdit}/>}
+ {isEdit && <EditTask 
+ task={task} 
+ isEdit={isEdit} 
+ onClose={()=>setIsEdit(false)}/>}
     
 
     </>
