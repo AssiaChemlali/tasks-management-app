@@ -18,6 +18,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
  
 const initialState={
   tasks:[],
+  allTasks: [],
   loading:false,
   error:null,
   status:"All"
@@ -29,18 +30,34 @@ const taskSlice=createSlice({
   reducers:{
     addNewTask(state,action){
     state.tasks.push(action.payload)
+    state.allTasks.push(action.payload);
    
     },
     removeTask(state,action){
+        state.tasks=state.tasks.filter((task)=>task.id!==action.payload)
+        state.allTasks = state.allTasks.filter((task) => task.id !== action.payload); 
 
     },
     updateTask(state,action){
-      
      state.tasks= state.tasks.map((task)=>{
         return task.id===action.payload.id ? action.payload : task
       })
-      console.log(state.tasks)
+      state.allTasks = state.allTasks.map((task) =>
+        task.id === action.payload.id ? action.payload : task
+      );
+
     },
+    filterTasks(state,action){
+      if (action.payload === "All") {
+        state.tasks = state.allTasks;
+      } else {
+          state.tasks = state.allTasks.filter(
+            (task) => task.status === action.payload
+          );
+      }
+
+    
+    }
    
   },
   extraReducers: (builder) => {
@@ -50,6 +67,7 @@ const taskSlice=createSlice({
     });
     builder.addCase(fetchTasks.fulfilled, (state, action) => {
       state.tasks = action.payload;
+      state.allTasks = action.payload;
       state.loading = false;
     });
     builder.addCase(fetchTasks.rejected, (state) => {
@@ -59,6 +77,6 @@ const taskSlice=createSlice({
   }
 })
 
-export const {addNewTask,removeTask,updateTask}=taskSlice.actions
+export const {addNewTask,removeTask,updateTask,filterTasks}=taskSlice.actions
 const tasksReducer=taskSlice.reducer
 export default tasksReducer

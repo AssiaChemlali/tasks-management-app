@@ -47,7 +47,7 @@ const statusRef=useRef()
       <textarea 
       name="desc" 
       id="" 
-      rows="10" 
+      rows="5" 
       ref={descRef}
       className='border p-2 rounded '
       placeholder='Task description'/>
@@ -58,8 +58,8 @@ const statusRef=useRef()
       id="status" 
       className='border p-2 rounded'>
         <option value="To Do">To Do</option>
-        <option value="Completed">Completed</option>
-        <option value="In Progress">in progress</option>
+          <option value="In Progress"> In Progress</option>
+          <option value="Completed"> Completed</option>
       </select>
 
       <button 
